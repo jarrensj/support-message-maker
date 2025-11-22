@@ -14,6 +14,11 @@ export default function Home() {
         `Hi, I hope you're doing well. I'm reaching out about my Order ${id} and was wondering if I could return this.`,
     },
     {
+      name: "Return - Unopened Item",
+      message: (id: string) =>
+        `Hi, I hope you're doing well. I'm reaching out about my Order ${id} and was wondering if I could return this. The item has never been opened and is still in its original packaging.`,
+    },
+    {
       name: "Package Missing",
       message: (id: string) =>
         `Hi, I hope you're doing well. I'm reaching out about my Order ${id}. Unfortunately, my package hasn't arrived yet and I was wondering if you could help me track it down.`,
@@ -22,6 +27,11 @@ export default function Home() {
       name: "Package Opened",
       message: (id: string) =>
         `Hi, I hope you're doing well. I'm reaching out about my Order ${id}. My package arrived but it appeared to have been opened or damaged during shipping. Could you please assist me with this issue?`,
+    },
+    {
+      name: "Arrived Too Late",
+      message: (id: string) =>
+        `Hi, I hope you're doing well. I'm reaching out about my Order ${id}. Unfortunately, the package arrived too late and I no longer need it. Could I please return this item?`,
     },
     {
       name: "General Inquiry",
