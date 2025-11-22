@@ -1,11 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Home() {
   const [orderId, setOrderId] = useState("");
   const [message, setMessage] = useState("");
   const [copied, setCopied] = useState(false);
+  const [selectedPreset, setSelectedPreset] = useState<
+    ((id: string) => string) | null
+  >(null);
 
   const presets = [
     {
@@ -41,10 +44,19 @@ export default function Home() {
   ];
 
   const handlePresetClick = (presetMessage: (id: string) => string) => {
+    setSelectedPreset(() => presetMessage);
     const orderIdText = orderId.trim() ? `${orderId.trim()}` : "[ORDER ID]";
     setMessage(presetMessage(orderIdText));
     setCopied(false);
   };
+
+  useEffect(() => {
+    if (selectedPreset) {
+      const orderIdText = orderId.trim() ? `${orderId.trim()}` : "[ORDER ID]";
+      setMessage(selectedPreset(orderIdText));
+      setCopied(false);
+    }
+  }, [orderId, selectedPreset]);
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(message);
